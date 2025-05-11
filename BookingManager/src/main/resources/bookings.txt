@@ -1,0 +1,4 @@
+BKG1001|Sarasitha Galagama|+94712175244|752/1/23,Rukmale Road, Kottawa|Male|sarasithagalagama@gmail.com|Beach Escape|2025-05-06|Confirmed||2|1000.0
+BKG1002|Chamath|+94712345678|25 Rose Avenue, Colombo 05|Male|chamath@gmail.com|Adventure Trek|2025-05-06|Confirmed||2|800.0
+BKG1003|Ishara|+94764567890|78 Green Park Road, Wellawatte|Female|ishara.fernando@gmail.com|Galle Fort|2025-05-06|Pending||2|200.0
+BKG1004|Lahith|+94764567890|102 Lake View, Kandy|Male|lahith@gmail.com|Adventure Trek|2025-05-06|Confirmed|Peanut allergy|3|1200.0
