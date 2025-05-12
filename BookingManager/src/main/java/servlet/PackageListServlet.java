@@ -9,7 +9,7 @@ import java.util.*;
 @WebServlet("/PackageListServlet")
 public class PackageListServlet extends HttpServlet {
     private static final String PACKAGE_FILE =
-            "C:/Users/ASUS/OneDrive/Desktop/UpdatedBookingManager/BookingManager/src/main/resources/packages.txt";
+            "C:\\Users\\ASUS\\OneDrive\\Desktop\\UpdatedBookingManager (2)\\UpdatedBookingManager\\BookingManager\\src\\main\\resources\\packages.txt";
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)

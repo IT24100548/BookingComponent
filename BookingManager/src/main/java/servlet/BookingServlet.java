@@ -12,7 +12,7 @@ import java.time.LocalDate;
 @WebServlet("/BookingServlet")
 public class BookingServlet extends HttpServlet {
     private static final String PACKAGE_FILE =
-            "C:\\Users\\ASUS\\OneDrive\\Desktop\\UpdatedBookingManager\\BookingManager\\src\\main\\resources\\packages.txt";
+            "C:\\Users\\ASUS\\OneDrive\\Desktop\\UpdatedBookingManager (2)\\UpdatedBookingManager\\BookingManager\\src\\main\\resources\\packages.txt";
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -23,7 +23,7 @@ public class BookingServlet extends HttpServlet {
         String gender = request.getParameter("gender");
         String email = request.getParameter("email");
         String packageName = request.getParameter("packageName");
-        String specialReq = request.getParameter("specialRequirements");  // NEW (may be null)
+        String specialReq = request.getParameter("specialRequirements");  // may be null
         int numberOfPeople = Integer.parseInt(request.getParameter("numberOfPeople"));
 
         // Generate ID & date
@@ -55,12 +55,10 @@ public class BookingServlet extends HttpServlet {
 
         BookingFileHandler.addBooking(booking);
 
-        response.setContentType("text/html");
-        try (PrintWriter out = response.getWriter()) {
-            out.println("<h2>Booking Successful!</h2>");
-            out.printf("<p>Total Price: %.2f</p>", totalPrice);
-            out.println("<a href=\"" + request.getContextPath()
-                    + "/BookingHistoryServlet\">View Booking History</a>");
-        }
+        // Set success data and forward to JSP
+        request.setAttribute("newTotalPrice", totalPrice);
+        request.setAttribute("success", true);
+        request.setAttribute("fullName", fullName);
+        request.getRequestDispatcher("bookingSuccess.jsp").forward(request, response);
     }
 }

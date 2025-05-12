@@ -12,7 +12,7 @@ import java.util.*;
 @WebServlet("/BookingUpdateServlet")
 public class BookingUpdateServlet extends HttpServlet {
     private static final String PACKAGE_FILE =
-            "C:\\Users\\ASUS\\OneDrive\\Desktop\\UpdatedBookingManager\\BookingManager\\src\\main\\resources\\packages.txt";
+            "C:\\Users\\ASUS\\OneDrive\\Desktop\\UpdatedBookingManager (2)\\UpdatedBookingManager\\BookingManager\\src\\main\\resources\\packages.txt";
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -66,6 +66,7 @@ public class BookingUpdateServlet extends HttpServlet {
         String gender = request.getParameter("gender");
         String email = request.getParameter("email");
         String packageName = request.getParameter("packageName");
+        String bookingDate = request.getParameter("bookingDate"); // ✅ newly added
         String status = request.getParameter("status");
         String specialReq = request.getParameter("specialRequirements");
         int numberOfPeople = Integer.parseInt(request.getParameter("numberOfPeople"));
@@ -94,6 +95,7 @@ public class BookingUpdateServlet extends HttpServlet {
                 b.setGender(gender);
                 b.setEmail(email);
                 b.setPackageId(packageName);
+                b.setBookingDate(bookingDate); // ✅ newly added
                 b.setStatus(status);
                 b.setSpecialRequirements(specialReq);
                 b.setNumberOfPeople(numberOfPeople);
@@ -104,16 +106,10 @@ public class BookingUpdateServlet extends HttpServlet {
             }
         }
 
-        response.setContentType("text/html");
-        try (PrintWriter out = response.getWriter()) {
-            if (found) {
-                out.println("<h2>Booking updated!</h2>");
-                out.printf("<p>New total price: %.2f</p>", totalPrice);
-            } else {
-                out.println("<h2 style='color:red;'>Booking not found.</h2>");
-            }
-            out.println("<a href=\"" + request.getContextPath()
-                    + "/BookingHistoryServlet\">Back to History</a>");
-        }
+        // Forward to JSP with attributes
+        request.setAttribute("newTotalPrice", totalPrice);
+        request.setAttribute("success", found);
+        request.setAttribute("fullName", fullName); // optional for success message
+        request.getRequestDispatcher("bookingSuccess.jsp").forward(request, response);
     }
 }

@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BookingFileHandler {
-    private static final String FILE_NAME = "C:\\Users\\ASUS\\OneDrive\\Desktop\\BookingManager\\src\\main\\resources\\bookings.txt";
+    private static final String FILE_NAME = "C:\\Users\\ASUS\\OneDrive\\Desktop\\UpdatedBookingManager (2)\\UpdatedBookingManager\\BookingManager\\src\\main\\resources\\bookings.txt";
 
     // Add a new booking (append to file)
     public static void addBooking(Booking booking) {
