@@ -199,20 +199,56 @@
             <i class="fas fa-user"></i> Customer Information
         </div>
         <div class="form-grid">
+
             <div class="form-field">
                 <label for="fullName">Full Name</label>
-                <input type="text" id="fullName" name="fullName" value="<%= booking.getFullName() %>" required>
+                <input type="text" id="fullName" name="fullName"
+                       value="<%= booking.getFullName() %>"
+                       required
+                       oninput="validateName(this)"
+                       pattern="[A-Za-z\s]+"
+                       title="Only letters and spaces allowed">
             </div>
 
+            <script>
+                function validateName(input) {
+                    input.value = input.value.replace(/[^a-zA-Z\s]/g, '');
+                }
+            </script>
+
+            <!-- Phone Number -->
             <div class="form-field">
                 <label for="phoneNumber">Phone Number</label>
-                <input type="text" id="phoneNumber" name="phoneNumber" value="<%= booking.getPhoneNumber() %>" required>
+                <input type="text" id="phoneNumber" name="phoneNumber"
+                       value="<%= booking.getPhoneNumber() %>"
+                       required
+                       oninput="validatePhone(this)"
+                       pattern="^\+?[0-9\s]{7,15}$"
+                       title="Only numbers, spaces, and optional '+' at the start">
             </div>
 
+            <script>
+                function validatePhone(input) {
+                    input.value = input.value.replace(/[^0-9+\s]/g, '');
+                }
+            </script>
+
+            <!-- Email -->
             <div class="form-field">
                 <label for="email">Email</label>
-                <input type="email" id="email" name="email" value="<%= booking.getEmail() %>" required>
+                <input type="email" id="email" name="email"
+                       value="<%= booking.getEmail() %>"
+                       required
+                       oninput="validateEmail(this)"
+                       pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+                       title="Enter a valid email address like you@example.com">
             </div>
+
+            <script>
+                function validateEmail(input) {
+                    input.value = input.value.replace(/[^a-z0-9@._%+\-]/g, '');
+                }
+            </script>
 
             <div class="form-field">
                 <label for="gender">Gender</label>
@@ -225,8 +261,19 @@
 
             <div class="form-field full-width">
                 <label for="address">Address</label>
-                <input type="text" id="address" name="address" value="<%= booking.getAddress() %>" required>
+                <input type="text" id="address" name="address"
+                       value="<%= booking.getAddress() %>" required
+                       oninput="validateAddress(this)"
+                       pattern="[A-Za-z0-9\s,./\-#]{5,100}"
+                       title="Only letters, numbers, spaces, commas, periods, slashes, dashes, and # allowed">
             </div>
+
+            <script>
+                function validateAddress(input) {
+                    input.value = input.value.replace(/[^a-zA-Z0-9\s,./\-#]/g, '');
+                }
+            </script>
+
         </div>
 
         <!-- Booking Details -->
@@ -249,7 +296,9 @@
 
             <div class="form-field">
                 <label for="bookingDate">Booking Date</label>
-                <input type="date" id="bookingDate" name="bookingDate" value="<%= booking.getBookingDate() %>" required>
+                <input type="date" id="bookingDate" name="bookingDate"
+                       value="<%= booking.getBookingDate() %>"
+                       required min="<%= java.time.LocalDate.now() %>">
             </div>
 
             <div class="form-field full-width">

@@ -317,7 +317,7 @@
             <td><%= bk.getPackageId() %></td>
             <td><%= bk.getBookingDate() %></td>
             <td><%= bk.getNumberOfPeople() %></td>
-            <td>$<%= bk.getTotalPrice() %></td>
+            <td>Rs.<%= bk.getTotalPrice() %></td>
             <td><span class="status <%= statusClass %>"><%= bk.getStatus() %></span></td>
             <td>
                 <form action="<%= request.getContextPath() %>/BookingUpdateServlet" method="get" style="display: inline;">

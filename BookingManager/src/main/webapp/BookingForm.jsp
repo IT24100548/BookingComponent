@@ -192,19 +192,55 @@
     </div>
     <form action="<%= request.getContextPath() %>/BookingServlet" method="post">
         <div class="form-grid">
+
             <div class="form-field">
                 <label for="fullName">Full Name</label>
-                <input type="text" id="fullName" name="fullName" required placeholder="John Doe">
+                <input type="text" id="fullName" name="fullName"
+                       required placeholder="Your Name"
+                       oninput="validateName(this)"
+                       pattern="[A-Za-z\s]+"
+                       title="Only letters and spaces allowed">
             </div>
+
+            <script>
+                function validateName(input) {
+                    input.value = input.value.replace(/[^a-zA-Z\s]/g, '');
+                }
+            </script>
+
             <div class="form-field">
                 <label for="phoneNumber">Phone Number</label>
-                <input type="text" id="phoneNumber" name="phoneNumber" required placeholder="+94 76 123 4567">
+                <input type="text" id="phoneNumber" name="phoneNumber"
+                       required placeholder="+94 71 217 5244"
+                       oninput="validatePhone(this)"
+                       pattern="^\+?[0-9\s]{7,15}$"
+                       title="Only numbers, spaces, and optional '+' at the start (7-15 characters)">
             </div>
+
+            <script>
+                function validatePhone(input) {
+                    input.value = input.value.replace(/[^0-9+\s]/g, '');
+                }
+            </script>
+
 
             <div class="form-field">
                 <label for="email">Email</label>
-                <input type="email" id="email" name="email" required placeholder="john@example.com">
+                <input type="email" id="email" name="email"
+                       required placeholder="youremail@gmail.com"
+                       oninput="validateEmail(this)"
+                       pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+                       title="Enter a valid email address like you@example.com">
             </div>
+
+            <script>
+                function validateEmail(input) {
+                    // Remove spaces and block uppercase letters or invalid characters
+                    input.value = input.value.replace(/[^a-z0-9@._%+\-]/g, '');
+                }
+            </script>
+
+
 
             <div class="form-field">
                 <label for="gender">Gender</label>
@@ -218,8 +254,19 @@
 
             <div class="form-field full-width">
                 <label for="address">Address</label>
-                <input type="text" id="address" name="address" required placeholder="123 Main St, Colombo">
+                <input type="text" id="address" name="address"
+                       required placeholder="Your address"
+                       oninput="validateAddress(this)"
+                       pattern="[A-Za-z0-9\s,./\-#]{5,100}"
+                       title="Only letters, numbers, spaces, commas, periods, slashes, dashes, and # allowed">
             </div>
+
+            <script>
+                function validateAddress(input) {
+                    input.value = input.value.replace(/[^a-zA-Z0-9\s,./\-#]/g, '');
+                }
+            </script>
+
         </div>
 
         <!-- Booking Details -->
@@ -242,8 +289,10 @@
 
             <div class="form-field">
                 <label for="bookingDate">Booking Date</label>
-                <input type="date" id="bookingDate" name="bookingDate" required>
+                <input type="date" id="bookingDate" name="bookingDate"
+                       required min="<%= java.time.LocalDate.now() %>">
             </div>
+
 
             <div class="form-field full-width">
                 <label for="specialRequirements">Special Requirements</label>
